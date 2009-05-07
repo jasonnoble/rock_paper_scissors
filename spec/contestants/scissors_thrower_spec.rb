@@ -1,5 +1,4 @@
 require File.dirname(__FILE__) + '/../spec_helper'
-require 'contestants/scissors_thrower'
 
 describe ScissorsThrower do
   it "should create an instance" do

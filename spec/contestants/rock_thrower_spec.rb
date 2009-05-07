@@ -1,5 +1,4 @@
 require File.dirname(__FILE__) + '/../spec_helper'
-require 'contestants/rock_thrower'
 
 describe RockThrower do
   it "should create an instance" do

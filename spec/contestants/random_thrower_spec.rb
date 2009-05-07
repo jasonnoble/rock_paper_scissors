@@ -1,5 +1,4 @@
 require File.dirname(__FILE__) + '/../spec_helper'
-require 'contestants/random_thrower'
 
 describe RandomThrower do
   it "should create an instance" do

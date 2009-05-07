@@ -1,5 +1,4 @@
 require File.dirname(__FILE__) + '/../spec_helper'
-require 'contestants/paper_thrower'
 
 describe PaperThrower do
   it "should create an instance" do
