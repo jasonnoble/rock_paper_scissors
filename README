@@ -1,0 +1,15 @@
+
+Rock Paper Scissors Tournament
+
+Use:
+
+  irb -rlib/tournament
+  
+  >> @t = Tournament.new([RockThrower, PaperThrower])
+  => #<Tournament:0x5cf544 @seed=[RockThrower, PaperThrower], @players=[RockThrower, PaperThrower], @matches=[[RockThrower, PaperThrower]]>
+  >> @t.run
+  PLAYERS: [RockThrower, PaperThrower]
+  #<PaperThrower:0x5cc790> won 100% of the time
+  #<PaperThrower:0x5cc790> wins the tournament
+  => #<PaperThrower:0x5cc790>
+  >>
