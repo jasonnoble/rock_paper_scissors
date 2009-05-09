@@ -22,10 +22,12 @@ describe Tournament do
   end
 
   describe "with three contestants (Rock, Paper, Scissors)," do
-    it "Scissors should win" do
+    it "Rock should win" do
       @t = Tournament.new([RockThrower,PaperThrower,ScissorsThrower])
       @t.run.class.should == RockThrower
+    end
 
+    it "Scissors should win" do
       @t = Tournament.new([ScissorsThrower,RockThrower,PaperThrower])
       @t.run.class.should == ScissorsThrower
     end
@@ -35,7 +37,8 @@ describe Tournament do
     it "Scissors should win" do
       @t = Tournament.new([RockThrower,PaperThrower,ScissorsThrower,
                            RockThrower,PaperThrower,ScissorsThrower,
-                           RockThrower,PaperThrower,ScissorsThrower,RockThrower])
+                           RockThrower,PaperThrower,ScissorsThrower,
+                           RockThrower])
       @t.run.class.should == ScissorsThrower
     end
   end

@@ -5,21 +5,21 @@ describe Scissors do
     Scissors.beats?(Paper).should be_true
   end
   
-  it "should beat rock" do
+  it "should not beat rock" do
     Scissors.beats?(Rock).should be_false
   end
 
-  it "should beat scissors" do
+  it "should not beat scissors" do
     Scissors.beats?(Scissors).should be_false
   end
 end
 
 describe Rock do
-  it "should beat paper" do
+  it "should not beat paper" do
     Rock.beats?(Paper).should be_false
   end
   
-  it "should beat rock" do
+  it "should not beat rock" do
     Rock.beats?(Rock).should be_false
   end
 
@@ -29,7 +29,7 @@ describe Rock do
 end
 
 describe Paper do
-  it "should beat paper" do
+  it "should not beat paper" do
     Paper.beats?(Paper).should be_false
   end
   
@@ -37,7 +37,7 @@ describe Paper do
     Paper.beats?(Rock).should be_true
   end
 
-  it "should beat scissors" do
+  it "should not beat scissors" do
     Paper.beats?(Scissors).should be_false
   end
 end
