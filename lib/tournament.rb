@@ -52,14 +52,29 @@ class Tournament
     players[0] = players[0].new if players[0].is_a?(Class)
     players[1] = players[1].new if players[1].is_a?(Class)
     
-    sum = 0
+    wins = Hash.new(0)
+    winner = nil
     100.times do
-      winner = players[0].play.beats?(players[1].play) ? players[0] : players[1]
-      sum += 1 if players.first == winner
+      play0 = players[0].play(winner == players[0] ? true : false)
+      play1 = players[1].play(winner == players[1] ? true : false)
+      winner = case play0.beats?(play1)
+      when -1: players[1]
+      when 1: players[0]
+      when 0: "tie"
+      end
+      puts "#{play0} vs #{play1} = #{winner}\n\n"
+      
+      wins[winner] += 1
     end
-    winner = sum > 50 ? players.first : players.last
-    winner_sum = sum > 50 ? sum : 100 - sum
-    puts "#{winner} won #{winner_sum}% of the time"
+    puts "Wins Percentages:"
+    wins.keys.sort{|a, b| wins[a] <=> wins[b]}.each {|key|
+      puts "\t#{key}\t#{sprintf("%.2f", wins[key].to_f/100)}"
+    }
+    wins.delete('tie')
+    # wins[Scissors] = 53; wins[Random] = 47
+    
+    winner = wins.keys.max{|a,b| wins[a] <=> wins[b]} || nil
+    puts "#{winner} won #{sprintf("%.2f", wins[winner].to_f/100)}% of the time"
     winner
     
     # winner = 

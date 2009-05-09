@@ -2,7 +2,7 @@ class RandomRockBiasThrower
   def initialize
   end
 
-  def play
+  def play(last_winner = nil)
     random = Kernel.rand
     return Rock if random < 0.50
     return Paper if random >= 0.50 && random < 0.75

@@ -20,6 +20,13 @@ describe Tournament do
       @t.run.class.should == PaperThrower
     end
   end
+  
+  describe "with two contestants (Paper and Paper)," do
+    it "it should be a tie" do
+      @t = Tournament.new([PaperThrower, PaperThrower])
+      @t.run.class.should == NilClass
+    end
+  end
 
   describe "with three contestants (Rock, Paper, Scissors)," do
     it "Rock should win" do
@@ -34,12 +41,12 @@ describe Tournament do
   end
   
   describe "with 10 contestants" do
-    it "Scissors should win" do
+    it "should result in a tie" do
       @t = Tournament.new([RockThrower,PaperThrower,ScissorsThrower,
                            RockThrower,PaperThrower,ScissorsThrower,
                            RockThrower,PaperThrower,ScissorsThrower,
                            RockThrower])
-      @t.run.class.should == ScissorsThrower
+      @t.run.class.should == NilClass
     end
   end
 end
