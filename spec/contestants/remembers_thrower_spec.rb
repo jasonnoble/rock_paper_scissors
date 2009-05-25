@@ -31,4 +31,13 @@ describe RemembersThrower do
     play5 = s.play(false)
     play5.should == play3    
   end
+  
+  it "should reset plays after three losses in a row" do
+    s = RemembersThrower.new
+    play1 = s.play
+    play2 = s.play(false)
+    play3 = s.play(false)
+    play4 = s.play(false)
+    s.play(false).should_not == nil
+  end
 end

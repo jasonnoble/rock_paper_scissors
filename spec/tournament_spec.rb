@@ -1,6 +1,25 @@
 require File.dirname(__FILE__) + '/spec_helper'
 
 describe Tournament do
+  describe "should have verbosity" do
+    it "that is initially turned off" do
+      @t = Tournament.new([RockThrower])
+      @t.verbose?.should be_false
+    end
+    
+    it "should be toggable" do
+      @t = Tournament.new([RockThrower])
+      @t.verbose = true
+      @t.verbose?.should be_true
+      
+      @t.verbose = false
+      @t.verbose?.should be_false
+      
+      @t.verbose = "blah"
+      @t.verbose?.should be_false
+    end
+  end
+  
   it "raises an error with < 2 players" do
     @t = Tournament.new([RockThrower])
     lambda{@t.run}.should raise_error("Tournament requires 2 or more players")

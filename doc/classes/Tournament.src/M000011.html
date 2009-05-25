@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>judge (Tournament)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/tournament.rb, line 95</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">judge</span>(<span class="ruby-identifier">players</span>)
+    <span class="ruby-identifier">players</span> = <span class="ruby-identifier">players</span>.<span class="ruby-identifier">compact</span>
+    <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">players</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">2</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{players.first} has a bye!&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">verbose?</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">players</span>.<span class="ruby-identifier">first</span>
+    <span class="ruby-keyword kw">end</span>
+    
+    <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">players</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-value str">&quot;Must judge a contest between 2 or less players&quot;</span>
+    <span class="ruby-keyword kw">end</span>
+    
+    <span class="ruby-comment cmt"># If we were passed a class, instantiate that class</span>
+    <span class="ruby-identifier">players</span>[<span class="ruby-value">0</span>] = <span class="ruby-identifier">players</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">new</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">players</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Class</span>)
+    <span class="ruby-identifier">players</span>[<span class="ruby-value">1</span>] = <span class="ruby-identifier">players</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">new</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">players</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Class</span>)
+    
+    <span class="ruby-identifier">wins</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>)
+    <span class="ruby-identifier">winner</span> = <span class="ruby-keyword kw">nil</span>
+    <span class="ruby-identifier">players</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">reset</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">players</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value str">'reset'</span>)
+    <span class="ruby-identifier">players</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">reset</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">players</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value str">'reset'</span>)
+    <span class="ruby-ivar">@judge_n_times</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword kw">do</span>
+      <span class="ruby-identifier">play0</span> = <span class="ruby-identifier">players</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">play</span>(<span class="ruby-identifier">winner</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">players</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">?</span> <span class="ruby-keyword kw">true</span> <span class="ruby-operator">:</span> <span class="ruby-keyword kw">false</span>)
+      <span class="ruby-identifier">play1</span> = <span class="ruby-identifier">players</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">play</span>(<span class="ruby-identifier">winner</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">players</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">?</span> <span class="ruby-keyword kw">true</span> <span class="ruby-operator">:</span> <span class="ruby-keyword kw">false</span>)
+      <span class="ruby-identifier">winner</span> = <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">play0</span>.<span class="ruby-identifier">beats?</span>(<span class="ruby-identifier">play1</span>)
+      <span class="ruby-keyword kw">when</span> <span class="ruby-value">-1</span><span class="ruby-operator">:</span> <span class="ruby-identifier">players</span>[<span class="ruby-value">1</span>]
+      <span class="ruby-keyword kw">when</span> <span class="ruby-value">1</span><span class="ruby-operator">:</span> <span class="ruby-identifier">players</span>[<span class="ruby-value">0</span>]
+      <span class="ruby-keyword kw">when</span> <span class="ruby-value">0</span><span class="ruby-operator">:</span> <span class="ruby-value str">&quot;tie&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{play0} vs #{play1} = #{winner}\n\n&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">verbose?</span>
+      <span class="ruby-identifier">wins</span>[<span class="ruby-identifier">winner</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+    <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">verbose?</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Wins Percentages:&quot;</span>
+      <span class="ruby-identifier">wins</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">sort</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">wins</span>[<span class="ruby-identifier">a</span>] <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">wins</span>[<span class="ruby-identifier">b</span>]}.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;\t#{key}\t#{sprintf(&quot;%.2f&quot;, (wins[key].to_f/@judge_n_times)*100)}&quot;</span>
+      }
+    <span class="ruby-keyword kw">end</span>
+    <span class="ruby-identifier">wins</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value str">'tie'</span>)
+    
+    <span class="ruby-identifier">winner</span> = <span class="ruby-identifier">wins</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">max</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">wins</span>[<span class="ruby-identifier">a</span>] <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">wins</span>[<span class="ruby-identifier">b</span>]} <span class="ruby-operator">||</span> <span class="ruby-keyword kw">nil</span>
+    <span class="ruby-identifier">printf</span>(<span class="ruby-value str">&quot;*** %45s vs %-45s ***     &quot;</span>, <span class="ruby-identifier">players</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">class</span>, <span class="ruby-identifier">players</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">class</span>)
+    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Winner: #{winner.class} (#{sprintf(&quot;%.2f&quot;, (wins[winner].to_f/@judge_n_times)*100)}%)&quot;</span>
+    <span class="ruby-identifier">winner</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>
