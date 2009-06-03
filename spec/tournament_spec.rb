@@ -1,6 +1,23 @@
 require File.dirname(__FILE__) + '/spec_helper'
 
 describe Tournament do
+  describe "quick_pick" do
+    before(:all) do
+      @a = Tournament.quick_pick
+    end
+    
+    it "should include Rock, Paper, Scissors" do
+      
+      @a.include?(Contestants::RockThrower).should be_true
+      @a.include?(Contestants::PaperThrower).should be_true
+      @a.include?(Contestants::ScissorsThrower).should be_true
+    end
+    
+    it "should not include Sample" do
+      @a.include?(Contestants::Sample).should be_false
+    end
+  end
+  
   describe "should have verbosity" do
     it "that is initially turned off" do
       @t = Tournament.new([RockThrower])
@@ -42,7 +59,9 @@ describe Tournament do
   
   describe "with two contestants (Paper and Paper)," do
     it "it should be a tie" do
-      @t = Tournament.new([PaperThrower, PaperThrower])
+      p1 = PaperThrower.new
+      p2 = PaperThrower.new
+      @t = Tournament.new([p1, p2])
       @t.run.class.should == NilClass
     end
   end
