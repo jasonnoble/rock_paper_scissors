@@ -5,7 +5,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Class: Contestants::RockThrower</title>
+  <title>Class: Contestants::Sample</title>
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
   <meta http-equiv="Content-Script-Type" content="text/javascript" />
   <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
@@ -50,13 +50,13 @@
         <table class="header-table">
         <tr class="top-aligned-row">
           <td><strong>Class</strong></td>
-          <td class="class-name-in-header">Contestants::RockThrower</td>
+          <td class="class-name-in-header">Contestants::Sample</td>
         </tr>
         <tr class="top-aligned-row">
             <td><strong>In:</strong></td>
             <td>
-                <a href="../../files/lib/contestants/rock_thrower_rb.html">
-                lib/contestants/rock_thrower.rb
+                <a href="../../files/lib/contestants/sample_rb.html">
+                lib/contestants/sample.rb
                 </a>
         <br />
             </td>
@@ -80,7 +80,7 @@
 
     <div id="description">
       <p>
-This contestant throws <a href="../Rock.html">Rock</a> every time.
+This contestant is a sample contestant
 </p>
 
     </div>
@@ -92,8 +92,9 @@ This contestant throws <a href="../Rock.html">Rock</a> every time.
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000024">new</a>&nbsp;&nbsp;
-      <a href="#M000025">play</a>&nbsp;&nbsp;
+      <a href="#M000021">new</a>&nbsp;&nbsp;
+      <a href="#M000022">play</a>&nbsp;&nbsp;
+      <a href="#M000023">reset</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -115,12 +116,12 @@ This contestant throws <a href="../Rock.html">Rock</a> every time.
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000024" class="method-detail">
-        <a name="M000024"></a>
+      <div id="method-M000021" class="method-detail">
+        <a name="M000021"></a>
 
         <div class="method-heading">
-          <a href="RockThrower.src/M000024.html" target="Code" class="method-signature"
-            onclick="popupCode('RockThrower.src/M000024.html');return false;">
+          <a href="Sample.src/M000021.html" target="Code" class="method-signature"
+            onclick="popupCode('Sample.src/M000021.html');return false;">
           <span class="method-name">new</span><span class="method-args">()</span>
           </a>
         </div>
@@ -131,17 +132,60 @@ This contestant throws <a href="../Rock.html">Rock</a> every time.
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000025" class="method-detail">
-        <a name="M000025"></a>
+      <div id="method-M000022" class="method-detail">
+        <a name="M000022"></a>
 
         <div class="method-heading">
-          <a href="RockThrower.src/M000025.html" target="Code" class="method-signature"
-            onclick="popupCode('RockThrower.src/M000025.html');return false;">
+          <a href="Sample.src/M000022.html" target="Code" class="method-signature"
+            onclick="popupCode('Sample.src/M000022.html');return false;">
           <span class="method-name">play</span><span class="method-args">(last_winner = nil)</span>
           </a>
         </div>
       
         <div class="method-description">
+          <p>
+Play function is what&#8216;s called by the <a
+href="../Tournament.html">Tournament</a> class to ask for what this
+contestant wants to <a href="Sample.html#M000022">play</a>
+</p>
+<p>
+Arguments:
+</p>
+<pre>
+   last_winner       Whether or not the last play resulted
+                     in this contestant winning.  The winner
+                     is sent back (compare to self) or in the
+                     case of a tie, the string &quot;tie&quot; will be sent.
+</pre>
+<p>
+Returns:
+</p>
+<pre>
+   A class of Paper, Rock, Scissors
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000023" class="method-detail">
+        <a name="M000023"></a>
+
+        <div class="method-heading">
+          <a href="Sample.src/M000023.html" target="Code" class="method-signature"
+            onclick="popupCode('Sample.src/M000023.html');return false;">
+          <span class="method-name">reset</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+This optional function allows the <a
+href="../Tournament.html">Tournament</a> to <a
+href="Sample.html#M000023">reset</a> the Contestant&#8216;s assumption. The
+<a href="../Tournament.html">Tournament</a> judge will call this function
+once per round, so each time you are played against a <a
+href="Sample.html#M000021">new</a> opponent, you should <a
+href="Sample.html#M000023">reset</a> your assumptions in this function.
+</p>
         </div>
       </div>
 

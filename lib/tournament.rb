@@ -33,7 +33,7 @@ class Tournament
   # Return one each of all of the contestants that are auto-loaded from the
   # lib/contestants directory.
   def Tournament::quick_pick
-    Contestants.constants.map{|c| eval "Contestants::#{c}" }
+    Contestants.constants.reject{|c| c.eql?("Sample")}.map{|c| eval "Contestants::#{c}" }
   end
   
   # Number of times each round should be played
@@ -112,8 +112,8 @@ class Tournament
     players[0].reset if players[0].respond_to?('reset')
     players[1].reset if players[1].respond_to?('reset')
     @judge_n_times.times do
-      play0 = players[0].play(winner == players[0] ? true : false)
-      play1 = players[1].play(winner == players[1] ? true : false)
+      play0 = players[0].play(winner)
+      play1 = players[1].play(winner)
       winner = case play0.beats?(play1)
       when -1: players[1]
       when 1: players[0]
