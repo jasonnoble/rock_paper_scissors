@@ -12,7 +12,7 @@
 <body class="standalone-code">
   <pre><span class="ruby-comment cmt"># File lib/tournament.rb, line 35</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-constant">Tournament</span><span class="ruby-operator">::</span><span class="ruby-identifier">quick_pick</span>
-    <span class="ruby-constant">Contestants</span>.<span class="ruby-identifier">constants</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">eval</span> <span class="ruby-node">&quot;Contestants::#{c}&quot;</span> }
+    <span class="ruby-constant">Contestants</span>.<span class="ruby-identifier">constants</span>.<span class="ruby-identifier">reject</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">eql?</span>(<span class="ruby-value str">&quot;Sample&quot;</span>)}.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">eval</span> <span class="ruby-node">&quot;Contestants::#{c}&quot;</span> }
   <span class="ruby-keyword kw">end</span></pre>
 </body>
 </html>
