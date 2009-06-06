@@ -1,6 +1,10 @@
 module Contestants
   # This contestant is a sample contestant
   class Sample
+    
+    # This function is run on the player creation, so
+    # you can setup any items you may need to keep track
+    # of what to play next, etc
     def initialize
       raise "Sample is not a valid contestant"
     end
