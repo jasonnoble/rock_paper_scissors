@@ -12,8 +12,8 @@ describe RockThrower do
   end
   
   it "should throw rock 100 times in a row" do
+    s = RockThrower.new
     100.times do
-      s = RockThrower.new
       s.play.should == Rock
     end
   end

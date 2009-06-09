@@ -12,8 +12,8 @@ describe PaperThrower do
   end
   
   it "should throw paper 100 times in a row" do
+    s = PaperThrower.new
     100.times do
-      s = PaperThrower.new
       s.play.should == Paper
     end
   end

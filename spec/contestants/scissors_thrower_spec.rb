@@ -12,8 +12,8 @@ describe ScissorsThrower do
   end
   
   it "should throw scissors 100 times in a row" do
+    s = ScissorsThrower.new
     100.times do
-      s = ScissorsThrower.new
       s.play.should == Scissors
     end
   end
