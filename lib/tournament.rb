@@ -29,7 +29,24 @@ class Tournament
     @verbose = false
     @judge_n_times = 100
   end
-  
+
+  # Execute a tournament.  It will run through all the matches until a
+  # final winner has been determined
+  def run
+    raise "Tournament requires 2 or more players" if @players.size < 2
+    
+    winner = find_winner(*@matches)
+    puts "#{winner.class} wins the tournament"
+    winner
+  end
+              
+  # Randomize the players and reload the matches
+  def reset
+    @players = @players.sort_by{rand}
+    load_matches
+    @matches
+  end
+
   # Return one each of all of the contestants that are auto-loaded from the
   # lib/contestants directory.
   def Tournament::quick_pick
@@ -41,13 +58,6 @@ class Tournament
   # Default is 100 times/round
   def judge_n_times=(judge_n_times=100)
     @judge_n_times = judge_n_times
-  end
-    
-  # Randomize the players and reload the matches
-  def reset
-    @players = @players.sort_by{rand}
-    load_matches
-    @matches
   end
   
   # Setter function for changing the debug messages
@@ -66,16 +76,6 @@ class Tournament
   # Default is No
   def verbose?
     @verbose
-  end
-  
-  # Execute a tournament.  It will run through all the matches until a
-  # final winner has been determined
-  def run
-    raise "Tournament requires 2 or more players" if @players.size < 2
-    
-    winner = find_winner(*@matches)
-    puts "#{winner.class} wins the tournament"
-    winner
   end
   
   protected
